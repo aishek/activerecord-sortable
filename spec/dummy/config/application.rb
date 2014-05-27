@@ -2,8 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'activerecord/sortable'
+
 Bundler.require(*Rails.groups)
-require "activerecord/sortable"
 
 module Dummy
   class Application < Rails::Application

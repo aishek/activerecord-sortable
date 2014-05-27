@@ -1,9 +1,13 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'activerecord/sortable'
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 
 require 'rspec/rails'
+require 'activerecord/sortable'
+
+require 'capybara/rspec'
+require 'capybara/rails'
+Capybara.app = Dummy::Application
 
 Rails.backtrace_cleaner.remove_silencers!
 
