@@ -16,9 +16,9 @@ module ActiveRecord
           }
           block.call(options) if block_given?
 
-          cattr_accessor :sortable_relation, :instance_reader => false
-          cattr_accessor :sortable_append, :instance_reader => true
-          cattr_accessor :sortable_position_column, :instance_reader => true
+          cattr_accessor :sortable_relation, :instance_reader => false, :instance_writer => false
+          cattr_accessor :sortable_append, :instance_reader => true, :instance_writer => false
+          cattr_accessor :sortable_position_column, :instance_reader => true, :instance_writer => false
 
           self.sortable_relation = options[:relation]
           self.sortable_append = options[:append]
