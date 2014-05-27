@@ -3,10 +3,10 @@ require 'spec_helper'
 describe 'drag and drop', :type => :feature, :js => true do
   before(:each) { Thing.delete_all }
 
-  describe 'drag up' do
-    let!(:thing1) { Thing.create }
-    let!(:thing2) { Thing.create }
+  let!(:thing1) { Thing.create }
+  let!(:thing2) { Thing.create }
 
+  describe 'drag up' do
     let(:thing1_selector) { "li[data-role=thing#{thing1.id}]" }
     let(:thing2_selector) { "li[data-role=thing#{thing2.id}]" }
 
@@ -19,12 +19,14 @@ describe 'drag and drop', :type => :feature, :js => true do
 
     it 'change first thing position to 0' do
       visit '/'
-      expect { subject }.to change{find(thing1_selector)['data-position']}.from("1").to("0")
+      subject
+      expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing1.id}' and @data-position='0']")
     end
 
     it 'change second thing position to 1' do
       visit '/'
-      expect { subject }.to change{find(thing2_selector)['data-position']}.from("0").to("1")
+      subject
+      expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing2.id}' and @data-position='1']")
     end
   end
 
@@ -49,12 +51,15 @@ describe 'drag and drop', :type => :feature, :js => true do
 
     it 'change first thing position to 0' do
       visit '/'
-      expect { subject }.to change{find(thing1_selector)['data-position']}.from("1").to("0")
+      subject
+      expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing1.id}' and @data-position='0']")
+
     end
 
     it 'change second thing position to 1' do
       visit '/'
-      expect { subject }.to change{find(thing2_selector)['data-position']}.from("0").to("1")
+      subject
+      expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing2.id}' and @data-position='1']")
     end
   end
 end
