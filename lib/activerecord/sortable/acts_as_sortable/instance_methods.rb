@@ -8,13 +8,9 @@ module ActiveRecord
 
           transaction do
             if new_position > self.send(sortable_position_column)
-              sortable_relation
-                .where(["#{sortable_position_column} > ? AND #{sortable_position_column} <= ?", self.send(sortable_position_column), new_position])
-                .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
+              sortable_relation_shift_left(new_position)
             else
-              sortable_relation
-                .where(["#{sortable_position_column} >= ? AND #{sortable_position_column} < ?", new_position, self.send(sortable_position_column)])
-                .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
+              sortable_relation_shift_right(new_position)
             end
 
             self.update_attribute(sortable_position_column, new_position)
@@ -23,6 +19,18 @@ module ActiveRecord
 
 
         private
+
+        def sortable_relation_shift_left(new_position)
+          sortable_relation
+            .where(["#{sortable_position_column} > ? AND #{sortable_position_column} <= ?", self.send(sortable_position_column), new_position])
+            .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
+        end
+
+        def sortable_relation_shift_right(new_position)
+          sortable_relation
+            .where(["#{sortable_position_column} >= ? AND #{sortable_position_column} < ?", new_position, self.send(sortable_position_column)])
+            .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
+        end
 
         def sortable_relation
           self.class.sortable_relation.call(self)
