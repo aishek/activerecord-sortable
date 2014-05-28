@@ -118,4 +118,4 @@ activerecord-sortable является бесплатным ПО, подробн
 Авторы:
 
 * [Александр Борисов](https://github.com/aishek)
-* Кирилл Храпков
+* [Кирилл Храпков](https://github.com/cubbiu)
