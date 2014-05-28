@@ -56,7 +56,7 @@ end
 
 ```
 
-```ruby
+```html
 <!-- app/views/things/index.html.erb -->
 
 <h1>Sortable thing</h1>
@@ -68,7 +68,7 @@ end
 </ol>
 ```
 
-```ruby
+```html
 <!-- app/views/things/_thing.html.erb -->
 
 <li data-role="thing<%= thing.id %>" data-move-url="<%= move_thing_url(thing) %>" data-position="<%= thing.position %>">
@@ -76,8 +76,8 @@ end
 </li>
 ```
 
-```ruby
-<!-- app/views/things/move.js.erb -->
+```js
+// app/views/things/move.js.er
 
 var node = $('*[data-role="thing<%= @thing.id %>"]');
 var new_node_html = '<%= j render @thing %>';
