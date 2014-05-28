@@ -5,6 +5,9 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require 'rspec/rails'
 require 'activerecord/sortable'
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'capybara/rspec'
 require 'capybara/rails'
 Capybara.app = Dummy::Application
