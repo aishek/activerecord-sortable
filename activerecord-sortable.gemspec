@@ -7,7 +7,7 @@ require 'activerecord/sortable/version'
 Gem::Specification.new do |gem|
   gem.name        = 'activerecord-sortable'
   gem.version     = ActiveRecord::Sortable::VERSION
-  gem.authors     = ['Alexandr Borisov']
+  gem.authors     = ['Alexandr Borisov', 'Kirill Khrapkov']
   gem.email       = 'aishek@gmail.com'
   gem.summary     = 'activerecord-sortable allows you easily integrate jquery ui sortable with your models'
   gem.homepage  = 'https://github.com/aishek/activerecord-sortable'
