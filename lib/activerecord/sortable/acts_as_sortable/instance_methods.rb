@@ -36,12 +36,20 @@ module ActiveRecord
 
         def sortable_assign_default_position
           if sortable_append
-            next_position = (max_position = sortable_relation.pluck(self.sortable_position_column).max).present? ? max_position + 1 : 0
-            self.send("#{sortable_position_column}=".to_sym, next_position)
+            sortable_append_instance
           else
-            sortable_relation.update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
-            self.send("#{sortable_position_column}=".to_sym, 0)
+            sortable_prepend_instance
           end
+        end
+
+        def sortable_append_instance
+          next_position = (max_position = sortable_relation.pluck(self.sortable_position_column).max).present? ? max_position + 1 : 0
+          self.send("#{sortable_position_column}=".to_sym, next_position)
+        end
+
+        def sortable_prepend_instance
+          sortable_relation.update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
+          self.send("#{sortable_position_column}=".to_sym, 0)
         end
 
         def sortable_updates_with_timestamps(base_query)
