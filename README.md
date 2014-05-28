@@ -109,7 +109,7 @@ $(document).ready(function(){
 
 ## Лицензия
 
-activerecord-sortable является бесплатным ПО, подробности в файле LICENSE.
+activerecord-sortable является бесплатным ПО, подробности в файле [LICENSE](https://github.com/aishek/activerecord-sortable/LICENSE).
 
 ## Авторы
 
