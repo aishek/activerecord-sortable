@@ -7,18 +7,20 @@
 activerecord-sortable
 ====================
 
-Этот gem позволяет интегрировать [jQuery UI Sortable](http://jqueryui.com/sortable/#default) с моделями в Rails-приложении: например, в системе управления сайтом можно сделать страницу для смены порядка товаров перетаскиванием на странице категории.
+[README на русском языке](https://github.com/aishek/activerecord-sortable/blob/master/README.ru.md)
 
-## Принцип работы
+The gem allows you to integrate [jQuery UI Sortable](http://jqueryui.com/sortable/#default) with your models in Ruby on Rails app: for example, you'll be able to create admin page to arrange some items using drag and drop.
 
-* Порядок поддерживается по значению целочисленного поля в модели, по-умолчанию `position`.
-* Создаётся скоуп по имени поля, по-умолчанию `ordered_by_position_asc`.
-* При удалении модели значения полей соседних по порядку моделей "сдвигаются" на единицу.
-* Gem добавляет в модель метод `move_to!`, который перемещает модель на указанную позицию.
-* Любые изменения значения поля порядка меняют значения полей `updated_at` и `updated_on`.
-* В gem входит jQuery-плагин для изменения порядка с помощью перетаскивания (см. пример ниже).
+## How it works
 
-## Пример
+* Order kept using values of integer column, `position` by default.
+* To retreive instances in order, auto created scope, `ordered_by_position_asc` by default.
+* All integer column values shifted for affected records on destroy some other record.
+* Auto created `move_to!`, wich allows to move instance to specified position.
+* Any position column changes affects `updated_at` and `updated_on` column values.
+* Gem includes jQuery-plugin to easily integrate drag and drop with `move_to!` (see example below).
+
+## Example
 
 ```ruby
 # Gemfile
@@ -80,7 +82,7 @@ end
 ```html
 <!-- app/views/things/_thing.html.erb -->
 
-<!-- data-role, data-move-url, data-position – обязательные атрибуты -->
+<!-- required attributes are data-role, data-move-url, data-position -->
 <li data-role="thing<%= thing.id %>" data-move-url="<%= move_thing_url(thing) %>" data-position="<%= thing.position %>">
   <h2>Thing <%= thing.id %></h2>
 </li>
@@ -109,31 +111,31 @@ $(document).ready(function(){
 });
 ```
 
-Смотрите также [код тестового приложения](https://github.com/aishek/activerecord-sortable/tree/master/spec/dummy).
+See also [dummy app code](https://github.com/aishek/activerecord-sortable/tree/master/spec/dummy).
 
-## Настройки
+## Settings
 ```ruby
 class Thing < ActiveRecord::Base
   acts_as_sortable do |config|
-    # внутри какого набора объектов поддерживать порядок
-    # опция полезна при использовании STI
-    # по-умолчанию – внутри всех эземпляров модели
+    # which relation use to keep instances in order
+    # this setting is useful in STI models case
+    # using all instances of model by default
     config[:relation] = ->(instance) {instance.class}
 
-    # добавлять ли в конец по порядку новые экземпляры моделей,
-    # по-умолчанию – вставлять в начало
+    # append new instances to relation on create
+    # prepend by default
     config[:append] = false
 
-    # используемое целочисленное поле в модели
-    # по-умолчанию – position
+    # integer column to specify order
+    # position by default
     config[:position_column] = :position
   end
 end
 ```
 
-## События Javascript
+## JavaScript Events
 
-В примере:
+Is example:
 
 ```js
 // app/assets/javascripts/application.js
@@ -149,16 +151,16 @@ $(document).ready(function(){
 });
 ```
 
-`$('*[data-role=activerecord_sortable]')` бросает события:
+`$('*[data-role=activerecord_sortable]')` triggers events:
 
-* `sortable:start` – запрос об изменении позиции отправлен на сервер
-* `sortable:stop` – сервер ответил на запрос об изменении позиции
-* `sortable:sort_success` – сервер ответил успехом на запрос об изменении позиции
-* `sortable:sort_error` – сервер ответил ошибкой на запрос об изменении позиции
+* `sortable:start` – change position ajax request sended to server
+* `sortable:stop` – server respond to ajax request
+* `sortable:sort_success` – server respond successfully to change position ajax request
+* `sortable:sort_error` – server respond with error to change position ajax request
 
-Перед отправкой запроса на сервер функциональность jQuery UI Sortable выключается, после получения ответа от сервера включается обратно.
+Before send ajax request to server jQuery UI Sortable disabled, after receive response enable.
 
-## Как добавить функциональность activerecord-sortable в существующую модель
+## How to add activerecord-sortable into existing model
 
 ```ruby
 # Gemfile
@@ -173,7 +175,7 @@ class AddPositionToItems < ActiveRecord::Migration
   def change
     add_column :items, :position, :integer
 
-    # не забудьте задать порядок
+    # specify order
     Item.order('id desc').each.with_index do |item, position|
       item.update_attribute :position, position
     end
@@ -194,21 +196,21 @@ end
 
 ```
 
-## Патчи и пулл-реквесты
+## Note on Patches / Pull Requests
 
-* Сделайте форк.
-* Внесите изменения.
-* Сделайте пулл-реквест. Ваши изменения в отдельной ветке принесут плюс в карму :)
+* Fork the project.
+* Make your feature addition or bug fix.
+* Send me a pull request. Bonus points for topic branches.
 
-## Лицензия
+## License
 
-activerecord-sortable является бесплатным ПО, подробности в файле [LICENSE](https://github.com/aishek/activerecord-sortable/LICENSE).
+activerecord-sortable is free software, and may be redistributed under the terms specified in the LICENSE file.
 
-## Авторы
+## Credits
 
-Плагин activerecord-sortable поддерживается [Цифрономикой](http://cifronomika.ru/).
+Gem activerecord-sortable is maintained by [Cifronomika](http://cifronomika.ru/).
 
-Авторы:
+Contributors:
 
-* [Александр Борисов](https://github.com/aishek)
-* [Кирилл Храпков](https://github.com/cubbiu)
+* [Alexandr Borisov](https://github.com/aishek)
+* [Kirill Khrapkov](https://github.com/cubbiu)
