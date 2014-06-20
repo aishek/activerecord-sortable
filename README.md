@@ -26,6 +26,7 @@ The gem allows you to integrate [jQuery UI Sortable](http://jqueryui.com/sortabl
 # Gemfile
 
 gem 'activerecord-sortable'
+gem 'jquery-ui-rails' # if you plan to use drag and drop
 ```
 
 ```ruby
@@ -103,7 +104,7 @@ end
 ```
 
 ```js
-// app/views/things/move.js.er
+// app/views/things/move.js.erb
 
 var node = $('*[data-role="thing<%= @thing.id %>"]');
 var new_node_html = '<%= j render @thing %>';
@@ -189,7 +190,7 @@ gem 'activerecord-sortable'
 # db/migrate/20140525112125_add_position_to_items.rb
 
 class AddPositionToItems < ActiveRecord::Migration
-  def change
+  def up
     add_column :items, :position, :integer
 
     # specify order
@@ -200,6 +201,10 @@ class AddPositionToItems < ActiveRecord::Migration
     change_column :items, :position, :integer, :null => false
 
     add_index :items, [:position]
+  end
+
+  def down
+    remove_column :items, :position, :integer
   end
 end
 ```
