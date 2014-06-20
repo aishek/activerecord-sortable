@@ -118,7 +118,10 @@ $(document).ready(function(){
 class Thing < ActiveRecord::Base
   acts_as_sortable do |config|
     # внутри какого набора объектов поддерживать порядок
-    # опция полезна при использовании STI
+    # опция полезна при использовании STI, например,
+    # чтобы управлять порядком в рамках одного STI-класса, укажите
+    # config[:relation] = ->(instance) {instance.class.base_class)}
+    #
     # по-умолчанию – внутри всех эземпляров модели
     config[:relation] = ->(instance) {instance.class}
 

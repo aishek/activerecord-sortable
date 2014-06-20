@@ -118,7 +118,10 @@ See also [dummy app code](https://github.com/aishek/activerecord-sortable/tree/m
 class Thing < ActiveRecord::Base
   acts_as_sortable do |config|
     # which relation use to keep instances in order
-    # this setting is useful in STI models case
+    # this setting is useful in STI models case, for example,
+    # to use order in one STI-class scope use
+    # config[:relation] = ->(instance) {instance.class.base_class)}
+    #
     # using all instances of model by default
     config[:relation] = ->(instance) {instance.class}
 
