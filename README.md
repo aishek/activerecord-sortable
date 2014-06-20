@@ -52,6 +52,20 @@ end
 ```
 
 ```ruby
+# config/routes.rb
+
+Dummy::Application.routes.draw do
+  resources :things, :only => [:index] do
+    member do
+      post :move
+    end
+  end
+
+  root 'things#index'
+end
+```
+
+```ruby
 # app/controllers/things_controller.rb
 
 class ThingsController < ApplicationController
