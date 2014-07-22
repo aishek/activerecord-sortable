@@ -218,6 +218,103 @@ end
 
 ```
 
+## Функциональность activerecord-sortable для вложенных моделей
+
+```ruby
+# app/models/parent.rb
+
+class Parent < ActiveRecord::Base
+  has_many :children
+
+  accepts_nested_attributes_for :children
+end
+
+```
+
+```ruby
+# app/models/child.rb
+
+class Child < ActiveRecord::Base
+  acts_as_sortable do |config|
+    config[:relation] = ->(instance) {instance.parent.children}
+  end
+
+  belongs_to :parent
+end
+
+```
+
+```ruby
+# app/models/child.rb
+
+class ParentsController < ApplicationController
+  def new
+    @parent = Parent.new
+    3.times do |position|
+      @parent.children.build(
+        :name => "Child #{position}",
+        :position => position # не забыть указать
+      )
+    end
+  end
+
+  def create
+    @parent = Parent.new parent_params
+    if @parent.save
+      redirect_to parent_path(@parent)
+    else
+      render :new
+    end
+  end
+
+  def show
+    @parent = Parent.find(params[:id])
+  end
+
+
+  private
+
+  def parent_params
+    params.require(:parent).permit(:children_attributes => [:name, :position])
+  end
+end
+
+```
+
+```html
+<!-- app/views/parents/new.html.erb -->
+
+<h1>New parent</h1>
+
+<%= render :partial => 'form' %>
+
+```
+
+```html
+<!-- app/views/parents/_form.html.erb -->
+
+<%= form_for @parent do |f| %>
+  <fieldset>
+    <legend>Children</legend>
+
+    <ol data-role="activerecord_sortable">
+      <%= f.fields_for :children do |ff| %>
+        <!-- оба атрибута обязательны -->
+        <li data-role="child<%= ff.object.to_s %>" data-position="<%= ff.object.position %>">
+          <%= ff.object.name %>
+
+          <!-- поле для передачи позиции в контроллер -->
+          <%= ff.hidden_field :position, :data => { :role => 'position' } %>
+        </li>
+      <% end %>
+    </ol>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>
+
+```
+
 ## Патчи и пулл-реквесты
 
 * Сделайте форк.
