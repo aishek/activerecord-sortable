@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525112123) do
+ActiveRecord::Schema.define(version: 20140721161122) do
+
+  create_table "children", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "parent_id",  null: false
+    t.integer  "position",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "children", ["position"], name: "index_children_on_position"
 
   create_table "items", force: true do |t|
     t.datetime "created_at"
@@ -28,6 +38,11 @@ ActiveRecord::Schema.define(version: 20140525112123) do
   end
 
   add_index "other_things", ["place"], name: "index_other_things_on_place"
+
+  create_table "parents", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "things", force: true do |t|
     t.integer  "position",   null: false
