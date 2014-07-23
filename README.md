@@ -245,7 +245,7 @@ end
 ```
 
 ```ruby
-# app/models/child.rb
+# app/controllers/parents_controller.rb
 
 class ParentsController < ApplicationController
   def new
@@ -278,7 +278,6 @@ class ParentsController < ApplicationController
     params.require(:parent).permit(:children_attributes => [:name, :position])
   end
 end
-
 ```
 
 ```html
@@ -287,7 +286,6 @@ end
 <h1>New parent</h1>
 
 <%= render :partial => 'form' %>
-
 ```
 
 ```html
@@ -312,7 +310,6 @@ end
 
   <%= f.submit %>
 <% end %>
-
 ```
 
 ## Note on Patches / Pull Requests

@@ -79,7 +79,6 @@ class ThingsController < ApplicationController
     @thing.move_to! params[:position]
   end
 end
-
 ```
 
 ```html
@@ -215,7 +214,6 @@ end
 class Item < ActiveRecord::Base
   acts_as_sortable
 end
-
 ```
 
 ## Функциональность activerecord-sortable для вложенных моделей
@@ -228,7 +226,6 @@ class Parent < ActiveRecord::Base
 
   accepts_nested_attributes_for :children
 end
-
 ```
 
 ```ruby
@@ -241,11 +238,10 @@ class Child < ActiveRecord::Base
 
   belongs_to :parent
 end
-
 ```
 
 ```ruby
-# app/models/child.rb
+# app/controllers/parents_controller.rb
 
 class ParentsController < ApplicationController
   def new
@@ -278,7 +274,6 @@ class ParentsController < ApplicationController
     params.require(:parent).permit(:children_attributes => [:name, :position])
   end
 end
-
 ```
 
 ```html
@@ -287,7 +282,6 @@ end
 <h1>New parent</h1>
 
 <%= render :partial => 'form' %>
-
 ```
 
 ```html
@@ -312,7 +306,6 @@ end
 
   <%= f.submit %>
 <% end %>
-
 ```
 
 ## Патчи и пулл-реквесты
