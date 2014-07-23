@@ -79,7 +79,6 @@ class ThingsController < ApplicationController
     @thing.move_to! params[:position]
   end
 end
-
 ```
 
 ```html
@@ -215,7 +214,6 @@ end
 class Item < ActiveRecord::Base
   acts_as_sortable
 end
-
 ```
 
 ## activerecord-sortable for nested models
@@ -228,7 +226,6 @@ class Parent < ActiveRecord::Base
 
   accepts_nested_attributes_for :children
 end
-
 ```
 
 ```ruby
@@ -241,7 +238,6 @@ class Child < ActiveRecord::Base
 
   belongs_to :parent
 end
-
 ```
 
 ```ruby
