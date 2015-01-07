@@ -18,10 +18,7 @@ shared_examples "activerecord-sortable" do |options = {}|
       end
 
       it 'should not change first thing updated_at' do
-        expect {
-          subject
-          thing1.reload
-        }.not_to change(thing1, :updated_at)
+        expect { subject }.not_to change { thing1.reload.updated_at }
       end
     end
 
@@ -41,10 +38,7 @@ shared_examples "activerecord-sortable" do |options = {}|
       end
 
       it 'should change first thing updated_at' do
-        expect {
-          subject
-          thing1.reload
-        }.to change(thing1, :updated_at)
+        expect { subject  }.to change { thing1.reload.updated_at }
       end
     end
   end
@@ -62,17 +56,11 @@ shared_examples "activerecord-sortable" do |options = {}|
     subject { thing1.destroy }
 
     it 'shifts next records' do
-      expect {
-        subject
-        thing2.reload
-      }.to change(thing2, position_column).to(0)
+      expect { subject }.to change { thing2.reload.send(position_column) }.to(0)
     end
 
     it 'change next record updated_at' do
-      expect {
-        subject
-        thing2.reload
-      }.to change(thing2, :updated_at)
+      expect { subject }.to change { thing2.reload.updated_at }
     end
   end
 
@@ -108,38 +96,23 @@ shared_examples "activerecord-sortable" do |options = {}|
       subject { thing3.move_to!(1) }
 
       it "should change thing3 #{position_column} to 1" do
-        expect {
-          subject
-          thing3.reload
-        }.to change(thing3, position_column).to(1)
+        expect { subject }.to change { thing3.reload.send(position_column) }.to(1)
       end
 
       it 'should change thing3 updated_at' do
-        expect {
-          subject
-          thing3.reload
-        }.to change(thing3, :updated_at)
+        expect { subject }.to change { thing3.reload.updated_at }
       end
 
       it "should change thing2 #{position_column} to 2" do
-        expect {
-          subject
-          thing2.reload
-        }.to change(thing2, position_column).to(2)
+        expect { subject }.to change { thing2.reload.send(position_column) }.to(2)
       end
 
       it 'should change thing2 updated_at' do
-        expect {
-          subject
-          thing2.reload
-        }.to change(thing2, :updated_at)
+        expect { subject }.to change { thing2.reload.updated_at }
       end
 
       it 'should not change thing1 updated_at' do
-        expect {
-          subject
-          thing1.reload
-        }.not_to change(thing1, :updated_at)
+        expect { subject }.not_to change { thing1.reload.updated_at }
       end
     end
 
@@ -147,38 +120,23 @@ shared_examples "activerecord-sortable" do |options = {}|
       subject { thing1.move_to!(1) }
 
       it "should change thing1 #{position_column} to 1" do
-        expect {
-          subject
-          thing1.reload
-        }.to change(thing1, position_column).to(1)
+        expect { subject }.to change { thing1.reload.send(position_column) }.to(1)
       end
 
       it 'should change thing1 updated_at' do
-        expect {
-          subject
-          thing1.reload
-        }.to change(thing1, :updated_at)
+        expect { subject }.to change { thing1.reload.updated_at }
       end
 
       it "should change thing2 #{position_column} to 0" do
-        expect {
-          subject
-          thing2.reload
-        }.to change(thing2, position_column).to(0)
+        expect { subject }.to change { thing2.reload.send(position_column) }.to(0)
       end
 
       it 'should change thing2 updated_at' do
-        expect {
-          subject
-          thing2.reload
-        }.to change(thing2, :updated_at)
+        expect { subject }.to change { thing2.reload.updated_at }
       end
 
       it 'should not change thing3 updated_at' do
-        expect {
-          subject
-          thing3.reload
-        }.not_to change(thing3, :updated_at)
+        expect { subject }.not_to change { thing3.reload.updated_at }
       end
     end
 
