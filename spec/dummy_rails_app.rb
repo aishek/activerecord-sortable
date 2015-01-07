@@ -16,14 +16,10 @@ app_path = "spec/dummy-#{version_parts.take(2).join('.')}"
 if (environment_path = environment_paths.find(&File.method(:exist?)))
   require environment_path
 
-  ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
-
-  schema_path = "#{app_path}/db/schema.rb"
-  load(schema_path)
-
-  require 'activerecord_shared_db_connection_patch'
+  require 'rake'
+  Dummy::Application.load_tasks
+  Rake::Task['db:reset'].invoke
 else
-
   rails_command = "rails new #{app_path} -TSJ --skip-bundle"
   command = "RAILS_VERSION=#{version} bundle exec #{rails_command}"
 
