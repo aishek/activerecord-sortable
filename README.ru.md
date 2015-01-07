@@ -118,7 +118,7 @@ node.replaceWith(new_node_html);
 //= require jquery_ujs
 //= require sortable
 
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 
 $(document).ready(function(){
   $('*[data-role=activerecord_sortable]').activerecord_sortable();
@@ -161,7 +161,7 @@ end
 //= require jquery_ujs
 //= require sortable
 
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 
 $(document).ready(function(){
   $('*[data-role=activerecord_sortable]').activerecord_sortable();
