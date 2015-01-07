@@ -1,0 +1,9 @@
+<h1>Parent <%= @parent.id %></h1>
+
+<ol>
+  <% @parent.children.each do |child| %>
+    <li data-position="<%= child.position %>"><%= child.name %></li>
+  <% end %>
+</ol>
+
+<p><%= link_to "New parent", new_parent_path %></p>

@@ -1,9 +1,7 @@
 $:.push File.expand_path('../lib', __FILE__)
 
-# Maintain your gem's version:
 require 'activerecord/sortable/version'
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |gem|
   gem.name        = 'activerecord-sortable'
   gem.version     = ActiveRecord::Sortable::VERSION
@@ -16,12 +14,8 @@ Gem::Specification.new do |gem|
   gem.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   gem.test_files = Dir["spec/**/*"]
 
-  gem.add_runtime_dependency 'rails', '>= 3.0'
-
   gem.add_development_dependency 'rspec-rails'
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'selenium-webdriver'
   gem.add_development_dependency 'coveralls'
-
-  gem.add_development_dependency 'sqlite3'
 end

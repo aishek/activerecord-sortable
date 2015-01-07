@@ -1,0 +1,4 @@
+var node = $('*[data-role="thing<%= @thing.id %>"]');
+var new_node_html = '<%= j render @thing %>';
+
+node.replaceWith(new_node_html);

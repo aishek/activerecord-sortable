@@ -13,7 +13,9 @@ shared_examples "activerecord-sortable" do |options = {}|
 
       subject { described_class.create }
 
-      its(position_column) { should == 1 }
+      it 'should have position eq 1' do
+        expect(subject.send(position_column)).to eq(1)
+      end
 
       it 'should not change first thing updated_at' do
         expect {
@@ -34,7 +36,9 @@ shared_examples "activerecord-sortable" do |options = {}|
 
       subject { described_class.create }
 
-      its(position_column) { should == 0 }
+      it 'should have position eq 0' do
+        expect(subject.send(position_column)).to eq(0)
+      end
 
       it 'should change first thing updated_at' do
         expect {
@@ -84,7 +88,9 @@ shared_examples "activerecord-sortable" do |options = {}|
 
     subject { described_class }
 
-    its("ordered_by_#{position_column}_asc".to_sym) { should match_array([thing1, thing2])}
+    it 'should orders' do
+      expect(subject.send("ordered_by_#{position_column}_asc".to_sym)).to match_array([thing1, thing2])
+    end
   end
 
   describe '#move_to!' do

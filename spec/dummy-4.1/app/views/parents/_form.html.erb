@@ -1,0 +1,18 @@
+<%= form_for @parent do |f| %>
+  <fieldset>
+    <legend>Children</legend>
+
+    <ol data-role="activerecord_sortable">
+      <%= f.fields_for :children do |ff| %>
+        <li data-role="child<%= ff.object.to_s %>" data-position="<%= ff.object.position %>">
+          <%= ff.object.name %>
+
+          <%= ff.hidden_field :name %>
+          <%= ff.hidden_field :position, :data => { :role => 'position' } %>
+        </li>
+      <% end %>
+    </ol>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>

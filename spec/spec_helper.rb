@@ -1,6 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require 'dummy_rails_app'
 
 require 'rspec/rails'
 require 'activerecord/sortable'
