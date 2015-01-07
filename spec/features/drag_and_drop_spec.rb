@@ -45,7 +45,7 @@ describe 'drag and drop', :type => :feature, :js => true do
           $.getScript("/assets/jquery.simulate.js", function(){
             var draggable = $('#{thing2_selector}');
             var droppable = $('#{thing1_selector}');
-            var dy = droppable.offset().top - draggable.offset().top + 1;
+            var dy = droppable.offset().top - draggable.offset().top;
 
             draggable.simulate('drag', {dx:0, dy: dy});
           });
