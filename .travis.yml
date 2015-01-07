@@ -13,3 +13,7 @@ env:
   - RAILS_VERSION='~> 4.2.0'
 script:
   bundle exec rspec
+matrix:
+  fast_finish: true
+  include:
+    - rvm: default
