@@ -24,7 +24,7 @@ module ActiveRecord
           self.sortable_append = options[:append]
           self.sortable_position_column = options[:position_column]
 
-          scope "ordered_by_#{self.sortable_position_column}_asc".to_sym, -> { order(self.sortable_position_column => :asc) }
+          scope "ordered_by_#{self.sortable_position_column}_asc".to_sym, -> { order(self.arel_table[self.sortable_position_column].asc) }
 
           before_create :sortable_set_default_position
           after_destroy :sortable_shift_on_destroy
