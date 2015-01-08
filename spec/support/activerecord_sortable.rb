@@ -1,4 +1,4 @@
-shared_examples "activerecord-sortable" do |options = {}|
+shared_examples 'activerecord-sortable' do |options = {}|
   position_column = options[:position_column] || :position
 
   describe '.create' do

@@ -10,21 +10,21 @@ module ActiveRecord
       module ClassMethods
         def acts_as_sortable(&block)
           options = {
-            :relation => ->(instance) {instance.class},
-            :append => false,
-            :position_column => :position
+            relation: ->(instance) { instance.class },
+            append: false,
+            position_column: :position
           }
           block.call(options) if block_given?
 
-          cattr_accessor :sortable_relation, :instance_reader => false, :instance_writer => false
-          cattr_accessor :sortable_append, :instance_reader => true, :instance_writer => false
-          cattr_accessor :sortable_position_column, :instance_reader => true, :instance_writer => false
+          cattr_accessor :sortable_relation, instance_reader: false, instance_writer: false
+          cattr_accessor :sortable_append, instance_reader: true, instance_writer: false
+          cattr_accessor :sortable_position_column, instance_reader: true, instance_writer: false
 
           self.sortable_relation = options[:relation]
           self.sortable_append = options[:append]
           self.sortable_position_column = options[:position_column]
 
-          scope "ordered_by_#{self.sortable_position_column}_asc".to_sym, -> { order(self.arel_table[self.sortable_position_column].asc) }
+          scope "ordered_by_#{sortable_position_column}_asc".to_sym, -> { order(arel_table[sortable_position_column].asc) }
 
           before_create :sortable_set_default_position
           after_destroy :sortable_shift_on_destroy

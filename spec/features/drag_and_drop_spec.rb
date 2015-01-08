@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'drag and drop', :type => :feature, :js => true do
+describe 'drag and drop', type: :feature, js: true do
   context 'existing things' do
     before(:each) { Thing.delete_all }
 
@@ -13,7 +13,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       subject do
         sleep 3
-        page.execute_script %Q{
+        page.execute_script "
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $('#{thing1_selector}');
             var droppable = $('#{thing2_selector}');
@@ -21,7 +21,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
             draggable.simulate('drag', {dx:0, dy: dy});
           });
-        }
+        "
         sleep 3
 
         click_button 'Refresh'
@@ -51,7 +51,7 @@ describe 'drag and drop', :type => :feature, :js => true do
         sleep 3
 
         delta = thing2.sortable_append ? -1 : 1
-        page.execute_script %Q{
+        page.execute_script "
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $('#{thing2_selector}');
             var droppable = $('#{thing1_selector}');
@@ -60,7 +60,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
             draggable.simulate('drag', {dx:0, dy: dy});
           });
-        }
+        "
         sleep 3
 
         click_button 'Refresh'
@@ -89,7 +89,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       subject do
         sleep 3
-        page.execute_script %Q{
+        page.execute_script %{
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $("#{child1_selector}");
             var droppable = $("#{child2_selector}");
@@ -106,13 +106,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       it 'change first child position to 2' do
         visit new_parent_path
         subject
-        expect(page).to have_selector("li[data-position='1']", :text => 'Child 0')
+        expect(page).to have_selector("li[data-position='1']", text: 'Child 0')
       end
 
       it 'change last child position to 0' do
         visit new_parent_path
         subject
-        expect(page).to have_selector("li[data-position='0']", :text => 'Child 2')
+        expect(page).to have_selector("li[data-position='0']", text: 'Child 2')
       end
     end
 
@@ -122,7 +122,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       subject do
         sleep 3
-        page.execute_script %Q{
+        page.execute_script %{
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $("#{child2_selector}");
             var droppable = $("#{child1_selector}");
@@ -139,19 +139,19 @@ describe 'drag and drop', :type => :feature, :js => true do
       it 'change first child position to 2' do
         visit new_parent_path
         subject
-        expect(page).to have_selector("li[data-position='2']", :text => 'Child 0')
+        expect(page).to have_selector("li[data-position='2']", text: 'Child 0')
       end
 
       it 'change middle child position to 0' do
         visit new_parent_path
         subject
-        expect(page).to have_selector("li[data-position='0']", :text => 'Child 1')
+        expect(page).to have_selector("li[data-position='0']", text: 'Child 1')
       end
 
       it 'change last child position to 1' do
         visit new_parent_path
         subject
-        expect(page).to have_selector("li[data-position='1']", :text => 'Child 2')
+        expect(page).to have_selector("li[data-position='1']", text: 'Child 2')
       end
     end
   end

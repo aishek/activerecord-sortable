@@ -2,33 +2,31 @@ module ActiveRecord
   module Sortable
     module ActsAsSortable
       module InstanceMethods
-
         def move_to!(new_position)
           new_position = Integer(new_position)
 
           transaction do
-            if new_position > self.send(sortable_position_column)
+            if new_position > send(sortable_position_column)
               sortable_relation_shift_left(new_position)
             else
               sortable_relation_shift_right(new_position)
             end
 
-            self.update_attribute(sortable_position_column, new_position)
+            update_attribute(sortable_position_column, new_position)
           end
         end
-
 
         private
 
         def sortable_relation_shift_left(new_position)
           sortable_relation
-            .where(["#{sortable_position_column} > ? AND #{sortable_position_column} <= ?", self.send(sortable_position_column), new_position])
+            .where(["#{sortable_position_column} > ? AND #{sortable_position_column} <= ?", send(sortable_position_column), new_position])
             .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
         end
 
         def sortable_relation_shift_right(new_position)
           sortable_relation
-            .where(["#{sortable_position_column} >= ? AND #{sortable_position_column} < ?", new_position, self.send(sortable_position_column)])
+            .where(["#{sortable_position_column} >= ? AND #{sortable_position_column} < ?", new_position, send(sortable_position_column)])
             .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
         end
 
@@ -37,7 +35,7 @@ module ActiveRecord
         end
 
         def sortable_set_default_position
-          sortable_assign_default_position unless self.send(sortable_position_column).present?
+          sortable_assign_default_position unless send(sortable_position_column).present?
 
           true
         end
@@ -51,13 +49,13 @@ module ActiveRecord
         end
 
         def sortable_append_instance
-          next_position = (max_position = sortable_relation.pluck(self.sortable_position_column).max).present? ? max_position + 1 : 0
-          self.send("#{sortable_position_column}=".to_sym, next_position)
+          next_position = (max_position = sortable_relation.pluck(sortable_position_column).max).present? ? max_position + 1 : 0
+          send("#{sortable_position_column}=".to_sym, next_position)
         end
 
         def sortable_prepend_instance
           sortable_relation.update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
-          self.send("#{sortable_position_column}=".to_sym, 0)
+          send("#{sortable_position_column}=".to_sym, 0)
         end
 
         def sortable_updates_with_timestamps(base_query)
@@ -69,11 +67,11 @@ module ActiveRecord
             query_items << "#{attr} = ?"
             current_time
           end
-          updates = [query_items.join(', ')] + update_values
+          [query_items.join(', ')] + update_values
         end
 
         def sortable_shift_on_destroy
-          sortable_relation.where(["#{sortable_position_column} > ?", self.send(sortable_position_column)]).update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
+          sortable_relation.where(["#{sortable_position_column} > ?", send(sortable_position_column)]).update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
           true
         end
       end

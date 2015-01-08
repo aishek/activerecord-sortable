@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 rails_version = ENV['RAILS_VERSION'] || '>= 3.0'
 gem 'rails', rails_version
