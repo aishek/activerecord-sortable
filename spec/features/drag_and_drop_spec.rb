@@ -12,10 +12,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:thing2_selector) { "li[data-role=thing#{thing2.id}]" }
 
       subject do
-        draggable = find(thing1_selector)
-        droppable = find(thing2_selector)
+        page.execute_script %Q{
+          var draggable = $('#{thing1_selector}');
+          var droppable = $('#{thing2_selector}');
+          var dy = droppable.offset().top - draggable.offset().top;
 
-        draggable.drag_to(droppable)
+          draggable.simulate('drag', {dx:0, dy: dy});
+        }
 
         click_button 'Refresh'
       end
@@ -41,10 +44,12 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:thing2_selector) { "li[data-role=thing#{thing2.id}]" }
 
       subject do
+        delta = thing2.sortable_append ? -1 : 1
         page.execute_script %Q{
           var draggable = $('#{thing2_selector}');
           var droppable = $('#{thing1_selector}');
-          var dy = droppable.offset().top - draggable.offset().top + 10;
+
+          var dy = droppable.offset().top - draggable.offset().top + #{delta};
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
@@ -59,21 +64,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       it 'change second thing position to 1' do
         visit '/'
-
-        child1 = find(thing1_selector)
-        p "#{child1.text} - #{child1['data-position']}"
-        child2 = find(thing2_selector)
-        p "#{child2.text} - #{child2['data-position']}"
-
         subject
-
-        p '---'
-
-        child1 = find(thing1_selector)
-        p "#{child1.text} - #{child1['data-position']}"
-        child2 = find(thing2_selector)
-        p "#{child2.text} - #{child2['data-position']}"
-
         expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing2.id}' and @data-position='#{thing2.sortable_append ? 0 : 1}']")
       end
     end
@@ -87,10 +78,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:child2_selector) { "li[data-position='0']" }
 
       subject do
-        draggable = find(child1_selector)
-        droppable = find(child2_selector)
+        page.execute_script %Q{
+          var draggable = $("#{child1_selector}");
+          var droppable = $("#{child2_selector}");
+          var dy = droppable.offset().top - draggable.offset().top - 1;
 
-        draggable.drag_to(droppable)
+          draggable.simulate('drag', {dx:0, dy: dy});
+        }
 
         click_button 'Create Parent'
       end
