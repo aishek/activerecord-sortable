@@ -19,6 +19,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
+        sleep 1
 
         click_button 'Refresh'
       end
@@ -53,6 +54,8 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
+        sleep 1
+
         click_button 'Refresh'
       end
 
@@ -85,6 +88,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
+        sleep 1
 
         click_button 'Create Parent'
       end
@@ -114,6 +118,7 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
+        sleep 1
 
         click_button 'Create Parent'
       end
