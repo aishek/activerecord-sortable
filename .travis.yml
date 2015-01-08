@@ -11,6 +11,13 @@ env:
   - RAILS_VERSION='~> 4.1.0'
   - RAILS_VERSION='~> 4.2.0'
 script:
-  bundle exec rspec
+  if [ -n "$RUBOCOP" ]; then
+    bundle exec rubocop
+  ; else
+    bundle exec rspec
+  ; fi
 matrix:
   fast_finish: true
+  include:
+    - env: RUBOCOP=true
+      rvm: default
