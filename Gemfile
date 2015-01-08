@@ -10,6 +10,10 @@ if defined?(JRUBY_VERSION)
   gem 'activerecord-jdbcsqlite3-adapter'
 else
   gem 'sqlite3'
+
+  if defined?(RUBY_VERSION) && RUBY_VERSION == '2.2.0'
+    gem 'rubysl-test-unit'
+  end
 end
 
 gemspec
