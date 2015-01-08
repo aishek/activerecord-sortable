@@ -14,11 +14,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       subject do
         sleep 0.5
         page.execute_script %Q{
-          var draggable = $('#{thing1_selector}');
-          var droppable = $('#{thing2_selector}');
-          var dy = droppable.offset().top - draggable.offset().top - 1;
+          $.getScript('/assets/jquery.simulate.js', function(){
+            var draggable = $('#{thing1_selector}');
+            var droppable = $('#{thing2_selector}');
+            var dy = droppable.offset().top - draggable.offset().top - 1;
 
-          draggable.simulate('drag', {dx:0, dy: dy});
+            draggable.simulate('drag', {dx:0, dy: dy});
+          });
         }
         sleep 0.5
 
@@ -50,12 +52,14 @@ describe 'drag and drop', :type => :feature, :js => true do
 
         delta = thing2.sortable_append ? -1 : 1
         page.execute_script %Q{
-          var draggable = $('#{thing2_selector}');
-          var droppable = $('#{thing1_selector}');
+          $.getScript('/assets/jquery.simulate.js', function(){
+            var draggable = $('#{thing2_selector}');
+            var droppable = $('#{thing1_selector}');
 
-          var dy = droppable.offset().top - draggable.offset().top + #{delta};
+            var dy = droppable.offset().top - draggable.offset().top + #{delta};
 
-          draggable.simulate('drag', {dx:0, dy: dy});
+            draggable.simulate('drag', {dx:0, dy: dy});
+          });
         }
         sleep 0.5
 
@@ -86,11 +90,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       subject do
         sleep 0.5
         page.execute_script %Q{
-          var draggable = $("#{child1_selector}");
-          var droppable = $("#{child2_selector}");
-          var dy = droppable.offset().top - draggable.offset().top - 1;
+          $.getScript('/assets/jquery.simulate.js', function(){
+            var draggable = $("#{child1_selector}");
+            var droppable = $("#{child2_selector}");
+            var dy = droppable.offset().top - draggable.offset().top - 1;
 
-          draggable.simulate('drag', {dx:0, dy: dy});
+            draggable.simulate('drag', {dx:0, dy: dy});
+          });
         }
         sleep 0.5
 
@@ -117,11 +123,13 @@ describe 'drag and drop', :type => :feature, :js => true do
       subject do
         sleep 0.5
         page.execute_script %Q{
-          var draggable = $("#{child2_selector}");
-          var droppable = $("#{child1_selector}");
-          var dy = droppable.offset().top - draggable.offset().top + 1;
+          $.getScript('/assets/jquery.simulate.js', function(){
+            var draggable = $("#{child2_selector}");
+            var droppable = $("#{child1_selector}");
+            var dy = droppable.offset().top - draggable.offset().top + 1;
 
-          draggable.simulate('drag', {dx:0, dy: dy});
+            draggable.simulate('drag', {dx:0, dy: dy});
+          });
         }
         sleep 0.5
 
