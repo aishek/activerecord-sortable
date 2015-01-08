@@ -15,11 +15,10 @@ describe 'drag and drop', :type => :feature, :js => true do
         page.execute_script %Q{
           var draggable = $('#{thing1_selector}');
           var droppable = $('#{thing2_selector}');
-          var dy = droppable.offset().top - draggable.offset().top;
+          var dy = droppable.offset().top - draggable.offset().top - 1;
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
-        sleep 1
 
         click_button 'Refresh'
       end
@@ -54,7 +53,6 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
-        sleep 1
 
         click_button 'Refresh'
       end
@@ -88,7 +86,6 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
-        sleep 1
 
         click_button 'Create Parent'
       end
@@ -118,7 +115,6 @@ describe 'drag and drop', :type => :feature, :js => true do
 
           draggable.simulate('drag', {dx:0, dy: dy});
         }
-        sleep 1
 
         click_button 'Create Parent'
       end
