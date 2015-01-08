@@ -42,13 +42,11 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       subject do
         page.execute_script %Q{
-          $.getScript("/assets/jquery.simulate.js", function(){
-            var draggable = $('#{thing2_selector}');
-            var droppable = $('#{thing1_selector}');
-            var dy = droppable.offset().top - draggable.offset().top;
+          var draggable = $('#{thing2_selector}');
+          var droppable = $('#{thing1_selector}');
+          var dy = droppable.offset().top - draggable.offset().top;
 
-            draggable.simulate('drag', {dx:0, dy: dy});
-          });
+          draggable.simulate('drag', {dx:0, dy: dy});
         }
         click_button 'Refresh'
       end
@@ -61,7 +59,21 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       it 'change second thing position to 1' do
         visit '/'
+
+        child1 = find(thing1_selector)
+        p "#{child1.text} - #{child1['data-position']}"
+        child2 = find(thing2_selector)
+        p "#{child2.text} - #{child2['data-position']}"
+
         subject
+
+        p '---'
+
+        child1 = find(thing1_selector)
+        p "#{child1.text} - #{child1['data-position']}"
+        child2 = find(thing2_selector)
+        p "#{child2.text} - #{child2['data-position']}"
+
         expect(page).to have_selector(:xpath, "//li[@data-role='thing#{thing2.id}' and @data-position='#{thing2.sortable_append ? 0 : 1}']")
       end
     end
@@ -102,13 +114,11 @@ describe 'drag and drop', :type => :feature, :js => true do
 
       subject do
         page.execute_script %Q{
-          $.getScript("/assets/jquery.simulate.js", function(){
-            var draggable = $("#{child2_selector}");
-            var droppable = $("#{child1_selector}");
-            var dy = droppable.offset().top - draggable.offset().top + 1;
+          var draggable = $("#{child2_selector}");
+          var droppable = $("#{child1_selector}");
+          var dy = droppable.offset().top - draggable.offset().top + 1;
 
-            draggable.simulate('drag', {dx:0, dy: dy});
-          });
+          draggable.simulate('drag', {dx:0, dy: dy});
         }
 
         click_button 'Create Parent'
