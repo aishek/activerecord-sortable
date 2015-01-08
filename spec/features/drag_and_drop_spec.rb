@@ -12,7 +12,7 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:thing2_selector) { "li[data-role=thing#{thing2.id}]" }
 
       subject do
-        sleep 1
+        sleep 3
         page.execute_script %Q{
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $('#{thing1_selector}');
@@ -22,7 +22,7 @@ describe 'drag and drop', :type => :feature, :js => true do
             draggable.simulate('drag', {dx:0, dy: dy});
           });
         }
-        sleep 1
+        sleep 3
 
         click_button 'Refresh'
       end
@@ -48,7 +48,7 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:thing2_selector) { "li[data-role=thing#{thing2.id}]" }
 
       subject do
-        sleep 1
+        sleep 3
 
         delta = thing2.sortable_append ? -1 : 1
         page.execute_script %Q{
@@ -61,7 +61,7 @@ describe 'drag and drop', :type => :feature, :js => true do
             draggable.simulate('drag', {dx:0, dy: dy});
           });
         }
-        sleep 1
+        sleep 3
 
         click_button 'Refresh'
       end
@@ -88,7 +88,7 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:child2_selector) { "li[data-position='0']" }
 
       subject do
-        sleep 1
+        sleep 3
         page.execute_script %Q{
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $("#{child1_selector}");
@@ -98,7 +98,7 @@ describe 'drag and drop', :type => :feature, :js => true do
             draggable.simulate('drag', {dx:0, dy: dy});
           });
         }
-        sleep 1
+        sleep 3
 
         click_button 'Create Parent'
       end
@@ -121,7 +121,7 @@ describe 'drag and drop', :type => :feature, :js => true do
       let(:child2_selector) { "li[data-position='0']" }
 
       subject do
-        sleep 1
+        sleep 3
         page.execute_script %Q{
           $.getScript('/assets/jquery.simulate.js', function(){
             var draggable = $("#{child2_selector}");
@@ -131,7 +131,7 @@ describe 'drag and drop', :type => :feature, :js => true do
             draggable.simulate('drag', {dx:0, dy: dy});
           });
         }
-        sleep 1
+        sleep 3
 
         click_button 'Create Parent'
       end
