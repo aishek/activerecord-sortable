@@ -11,7 +11,7 @@ if defined?(JRUBY_VERSION)
 else
   gem 'sqlite3'
 
-  if defined?(RUBY_VERSION) && RUBY_VERSION == '2.2.0' && ENV['RAILS_VERSION'] == '~> 3.2.0'
+  if defined?(RUBY_VERSION) && RUBY_VERSION == '2.2.0' && ['~> 3.2.0', '~> 4.0.0'].include?(ENV['RAILS_VERSION'])
     gem 'rubysl-test-unit'
   end
 end
