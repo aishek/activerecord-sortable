@@ -19,10 +19,12 @@ module ActiveRecord
           cattr_accessor :sortable_relation, instance_reader: false, instance_writer: false
           cattr_accessor :sortable_append, instance_reader: true, instance_writer: false
           cattr_accessor :sortable_position_column, instance_reader: true, instance_writer: false
+          cattr_accessor :escaped_sortable_position_column, instance_reader: true, instance_writer: false
 
           self.sortable_relation = options[:relation]
           self.sortable_append = options[:append]
           self.sortable_position_column = options[:position_column]
+          self.escaped_sortable_position_column = ActiveRecord::Base.connection.quote_column_name(options[:position_column])
 
           scope "ordered_by_#{sortable_position_column}_asc".to_sym, -> { order(arel_table[sortable_position_column].asc) }
 

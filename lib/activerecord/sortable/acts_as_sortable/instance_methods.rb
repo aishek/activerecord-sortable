@@ -20,14 +20,14 @@ module ActiveRecord
 
         def sortable_relation_shift_left(new_position)
           sortable_relation
-            .where(["#{sortable_position_column} > ? AND #{sortable_position_column} <= ?", send(sortable_position_column), new_position])
-            .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
+            .where(["#{escaped_sortable_position_column} > ? AND #{escaped_sortable_position_column} <= ?", send(sortable_position_column), new_position])
+            .update_all sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} - 1")
         end
 
         def sortable_relation_shift_right(new_position)
           sortable_relation
-            .where(["#{sortable_position_column} >= ? AND #{sortable_position_column} < ?", new_position, send(sortable_position_column)])
-            .update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
+            .where(["#{escaped_sortable_position_column} >= ? AND #{escaped_sortable_position_column} < ?", new_position, send(sortable_position_column)])
+            .update_all sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} + 1")
         end
 
         def sortable_relation
@@ -54,7 +54,7 @@ module ActiveRecord
         end
 
         def sortable_prepend_instance
-          sortable_relation.update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} + 1")
+          sortable_relation.update_all sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} + 1")
           send("#{sortable_position_column}=".to_sym, 0)
         end
 
@@ -71,7 +71,7 @@ module ActiveRecord
         end
 
         def sortable_shift_on_destroy
-          sortable_relation.where(["#{sortable_position_column} > ?", send(sortable_position_column)]).update_all sortable_updates_with_timestamps("#{sortable_position_column} = #{sortable_position_column} - 1")
+          sortable_relation.where(["#{escaped_sortable_position_column} > ?", send(sortable_position_column)]).update_all sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} - 1")
           true
         end
       end
