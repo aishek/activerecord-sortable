@@ -71,7 +71,9 @@ module ActiveRecord
         end
 
         def sortable_shift_on_destroy
-          sortable_relation.where(["#{escaped_sortable_position_column} > ?", send(sortable_position_column)]).update_all sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} - 1")
+          position_threshold = send(sortable_position_column)
+          position_update = sortable_updates_with_timestamps("#{escaped_sortable_position_column} = #{escaped_sortable_position_column} - 1")
+          sortable_relation.where(["#{escaped_sortable_position_column} > ?", position_threshold]).update_all position_update
           true
         end
       end
