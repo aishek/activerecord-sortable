@@ -14,7 +14,6 @@ Gem::Specification.new do |gem|
   gem.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   gem.test_files = Dir["spec/**/*"]
 
-  gem.add_development_dependency 'rspec-rails'
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'poltergeist'
   gem.add_development_dependency 'coveralls'

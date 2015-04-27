@@ -16,4 +16,14 @@ else
   end
 end
 
+if defined?(RUBY_VERSION) && RUBY_VERSION == '2.2.0' && ENV['RAILS_VERSION'] == '~> 3.2.0'
+  gem 'rspec-rails', :github => 'rspec/rspec-rails', :ref => 'a09a6231ceecefa177ec08b27c3066d5947e5899'
+  gem 'rspec-support', :github => 'rspec/rspec-support'
+  gem 'rspec-core', :github => 'rspec/rspec-core'
+  gem 'rspec-expectations', :github => 'rspec/rspec-expectations'
+  gem 'rspec-mocks', :github => 'rspec/rspec-mocks'
+else
+  gem 'rspec-rails'
+end
+
 gemspec
