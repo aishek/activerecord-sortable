@@ -150,7 +150,7 @@ class Thing < ActiveRecord::Base
 end
 ```
 
-## JavaScript Events
+## JavaScript Events and Settings
 
 Is example:
 
@@ -176,6 +176,9 @@ $(document).ready(function(){
 * `sortable:sort_error` – server respond with error to change position ajax request
 
 Before send ajax request to server jQuery UI Sortable disabled, after receive response enable.
+
+`activerecord_sortable()` accetps [JQuery UI Sortable](http://api.jqueryui.com/sortable/)-style options. By default `axis` uses `y` value (to prevent horizontal dragging), and `update` overwrites by internal handler and is unavailabe to set.
+
 
 ## How to add activerecord-sortable into existing model
 

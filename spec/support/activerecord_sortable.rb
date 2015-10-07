@@ -38,7 +38,7 @@ shared_examples 'activerecord-sortable' do |options = {}|
       end
 
       it 'should change first thing updated_at' do
-        expect { subject  }.to change { thing1.reload.updated_at }
+        expect { subject }.to change { thing1.reload.updated_at }
       end
     end
   end
