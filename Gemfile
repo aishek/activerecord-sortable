@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 rails_version = ENV['RAILS_VERSION'] || '>= 3.0'
 gem 'rails', rails_version
-
+if ENV['RAILS_VERSION'] == '~> 3.2.0' && (RUBY_VERSION == '1.9.3' || defined?(JRUBY_VERSION))
+  gem 'rack-cache', '1.2'
+end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
