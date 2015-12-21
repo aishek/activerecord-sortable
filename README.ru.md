@@ -224,7 +224,7 @@ end
 # app/models/parent.rb
 
 class Parent < ActiveRecord::Base
-  has_many :children
+  has_many :children, -> { ordered_by_position_asc }
 
   accepts_nested_attributes_for :children
 end
