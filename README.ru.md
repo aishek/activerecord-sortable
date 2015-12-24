@@ -146,6 +146,11 @@ class Thing < ActiveRecord::Base
     # используемое целочисленное поле в модели
     # по-умолчанию – position
     config[:position_column] = :position
+
+    # обновлять updated_at/updated_on для других экземпляров моделей
+    # внутри набора
+    # true по-умолчанию
+    config[:touch] = true
   end
 end
 ```

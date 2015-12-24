@@ -63,11 +63,16 @@ module ActiveRecord
 
           query_items = [base_query]
 
-          update_values = timestamp_attributes_for_update_in_model.map do |attr|
+          update_values = sortable_timestamp_attributes_for_update_in_model.map do |attr|
             query_items << "#{attr} = ?"
             current_time
           end
           [query_items.join(', ')] + update_values
+        end
+
+        def sortable_timestamp_attributes_for_update_in_model
+          return [] unless sortable_touch
+          timestamp_attributes_for_update_in_model
         end
 
         def sortable_shift_on_destroy
