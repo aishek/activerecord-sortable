@@ -12,7 +12,8 @@ module ActiveRecord
           options = {
             relation: ->(instance) { instance.class },
             append: false,
-            position_column: :position
+            position_column: :position,
+            touch: true
           }
           block.call(options) if block_given?
 
@@ -34,6 +35,7 @@ module ActiveRecord
           cattr_accessor :sortable_append, instance_reader: true, instance_writer: false
           cattr_accessor :sortable_position_column, instance_reader: true, instance_writer: false
           cattr_accessor :escaped_sortable_position_column, instance_reader: true, instance_writer: false
+          cattr_accessor :sortable_touch, instance_reader: true, instance_writer: false
         end
 
         def sortable_relation_provide_accessor_values(options)
@@ -41,6 +43,7 @@ module ActiveRecord
           self.sortable_append = options[:append]
           self.sortable_position_column = options[:position_column]
           self.escaped_sortable_position_column = ActiveRecord::Base.connection.quote_column_name(options[:position_column])
+          self.sortable_touch = options[:touch]
         end
       end
     end

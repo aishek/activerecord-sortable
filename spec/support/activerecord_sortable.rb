@@ -37,8 +37,20 @@ shared_examples 'activerecord-sortable' do |options = {}|
         expect(subject.send(position_column)).to eq(0)
       end
 
-      it 'should change first thing updated_at' do
-        expect { subject }.to change { thing1.reload.updated_at }
+      context 'touch is on' do
+        it 'should change first thing updated_at' do
+          expect { subject }.to change { thing1.reload.updated_at }
+        end
+      end
+
+      context 'touch is off' do
+        before { described_class.sortable_touch = false }
+
+        it 'should not change first thing updated_at' do
+          expect { subject }.not_to change { thing1.reload.updated_at }
+        end
+
+        after { described_class.sortable_touch = true }
       end
     end
   end

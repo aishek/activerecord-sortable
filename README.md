@@ -146,6 +146,10 @@ class Thing < ActiveRecord::Base
     # integer column to specify order
     # position by default
     config[:position_column] = :position
+
+    # touch other members of relation on prepend
+    # true by default
+    config[:touch] = true
   end
 end
 ```
