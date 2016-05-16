@@ -181,7 +181,7 @@ $(document).ready(function(){
 
 Before send ajax request to server jQuery UI Sortable disabled, after receive response enable.
 
-`activerecord_sortable()` accetps [JQuery UI Sortable](http://api.jqueryui.com/sortable/)-style options. By default `axis` uses `y` value (to prevent horizontal dragging), and `update` overwrites by internal handler and is unavailabe to set.
+`activerecord_sortable()` accepts [JQuery UI Sortable](http://api.jqueryui.com/sortable/)-style options. By default `axis` uses `y` value (to prevent horizontal dragging), and `update` overwrites by internal handler and is unavailabe to set.
 
 
 ## How to add activerecord-sortable into existing model
