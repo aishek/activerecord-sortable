@@ -183,6 +183,8 @@ Before send ajax request to server jQuery UI Sortable disabled, after receive re
 
 `activerecord_sortable()` accepts [JQuery UI Sortable](http://api.jqueryui.com/sortable/)-style options. By default `axis` uses `y` value (to prevent horizontal dragging), and `update` overwrites by internal handler and is unavailabe to set.
 
+`$('*[data-role=activerecord_sortable]')` node may have `start-position` data-attribute (`<div data-start-position="10">...</div>`) in this case first element position will be equal to data-attribute value. If `start-position` not set, then first child node data-attribute `position` will be taken, `0` otherwise.
+
 
 ## How to add activerecord-sortable into existing model
 
