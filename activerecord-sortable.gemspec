@@ -15,7 +15,9 @@ Gem::Specification.new do |gem|
   gem.test_files = Dir["spec/**/*"]
 
   gem.add_development_dependency 'capybara'
-  gem.add_development_dependency 'poltergeist'
+  gem.add_development_dependency 'poltergeist', '1.7.0'
+  gem.add_development_dependency 'phantomjs', '2.1.1.0'
+
   gem.add_development_dependency 'coveralls'
   gem.add_development_dependency 'rubocop'
 end

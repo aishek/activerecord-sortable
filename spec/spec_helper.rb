@@ -11,6 +11,7 @@ Coveralls.wear!
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'phantomjs/poltergeist'
 Capybara.javascript_driver = :poltergeist
 Capybara.app = Dummy::Application
 
