@@ -8,14 +8,14 @@ module ActiveRecord
       extend ::ActiveSupport::Concern
 
       module ClassMethods
-        def acts_as_sortable(&block)
+        def acts_as_sortable
           options = {
             relation: ->(instance) { instance.class },
             append: false,
             position_column: :position,
             touch: true
           }
-          block.call(options) if block_given?
+          yield(options) if block_given?
 
           sortable_relation_create_accessors
           sortable_relation_provide_accessor_values(options)
