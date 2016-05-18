@@ -8,6 +8,10 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+if ENV['RAILS_VERSION'] == '~> 3.2.0' && (RUBY_VERSION == '1.9.3' || defined?(JRUBY_VERSION))
+  gem 'mime-types-data', '3.2015.1120'
+end
+
 if defined?(JRUBY_VERSION)
   gem 'activerecord-jdbcsqlite3-adapter'
 else
