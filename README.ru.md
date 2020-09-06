@@ -325,9 +325,11 @@ end
 
 activerecord-sortable является бесплатным ПО, подробности в файле [LICENSE](https://github.com/aishek/activerecord-sortable/LICENSE).
 
-## Авторы
+## Спонсоры
 
-Gem activerecord-sortable поддерживается [Цифрономикой](http://cifronomika.ru/).
+Разработку спонсирует компания [JetRockets](http://www.jetrockets.pro).
+
+<img src="https://media.jetrockets.pro/jetrockets-white.svg" width="250" alt="JetRockets">
 
 Авторы:
 

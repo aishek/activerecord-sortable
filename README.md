@@ -327,7 +327,9 @@ activerecord-sortable is free software, and may be redistributed under the terms
 
 ## Credits
 
-Gem activerecord-sortable is maintained by [Cifronomika](http://cifronomika.ru/).
+Sponsored by [JetRockets](http://www.jetrockets.pro).
+
+<img src="https://media.jetrockets.pro/jetrockets-white.svg" width="250" alt="JetRockets">
 
 Contributors:
 
