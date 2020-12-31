@@ -325,13 +325,7 @@ end
 
 activerecord-sortable is free software, and may be redistributed under the terms specified in the LICENSE file.
 
-## Credits
-
-Sponsored by [JetRockets](http://www.jetrockets.pro).
-
-<img src="https://media.jetrockets.pro/jetrockets-white.svg" width="250" alt="JetRockets">
-
-Contributors:
+## Contributors
 
 * [Alexandr Borisov](https://github.com/aishek)
 * [Kirill Khrapkov](https://github.com/cubbiu)
